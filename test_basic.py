@@ -1,6 +1,5 @@
 import unittest
-import math
-from main import calpoly_email_addresses, GlobeRect, Region, RegionCondition, example_region_conditions, densest, project_condition
+from ghg import calpoly_email_addresses, GlobeRect, Region, RegionCondition, example_region_conditions, densest, project_condition, area, emissions_per_capita, emissions_per_square_km
 
 # please note: these are not real tests! They don't include
 # expected results, and they don't actually test that the
@@ -55,28 +54,29 @@ class MyTests(unittest.TestCase):
     def test_emissions_per_capita(self):
         gr1 = GlobeRect(3.0, 4.0, 5.0, 6.0)
         r1 = Region(gr1, "bogo", "ocean")
-        RegionCondition(r1, 2000, 1, 0.00).emissions_per_capita()
+        self.assertEqual(type(emissions_per_capita(RegionCondition(r1, 2000, 1, 0.00))),float)
 
     def test_area(self):
         gr1 = GlobeRect(3.0, 4.0, 5.0, 6.0)
-        gr1.area()
+        self.assertEqual(type(area(gr1)),float)
 
     def test_emissions_per_square_km(self):
         gr1 = GlobeRect(3.0, 4.0, 5.0, 6.0)
         r1 = Region(gr1, "bogo", "ocean")
-        RegionCondition(r1, 2000, 1, 0.00).emissions_per_square_km()
+        emissions_per_square_km(RegionCondition(r1, 2000, 1, 0.00))
 
     def test_densest(self):
         gr1 = GlobeRect(3.0, 4.0, 5.0, 6.0)
         r1 = Region(gr1, "bogo", "ocean")
         rc1 = RegionCondition(r1, 2000, 1, 0.00)
-        densest([rc1])
+        self.assertEqual(type(densest([rc1])),str)
 
     def test_project_condition(self):
         gr1 = GlobeRect(3.0, 4.0, 5.0, 6.0)
         r1 = Region(gr1, "bogo", "ocean")
         rc1 = RegionCondition(r1, 2000, 1, 0.00)
-        project_condition(rc1,0)
+        self.assertEqual(type(project_condition(rc1,0)),RegionCondition)
+
 
 if (__name__ == '__main__'):
     unittest.main()
