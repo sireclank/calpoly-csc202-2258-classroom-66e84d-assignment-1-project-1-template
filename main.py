@@ -28,20 +28,30 @@ class RegionCondition:
     region : Region
     year : int #The year of the region
     pop : int #The population of people in the region
-    ghg_rate : float #in million metric tons of C02 equivalent per year
+    ghg_rate : float 
 
-region1 : RegionCondition = RegionCondition(Region(GlobeRect(47.49616, 47.73464, -122.43689, -122.23591), "Seattle", "Port City"), 2022, 751454, 2.98)
-region2 : RegionCondition = RegionCondition(Region(GlobeRect(44.47121, 44.57550, -88.14111, -87.84214), "Green Bay", "Port City"), 2018, 104756, 2.78)
+region1 : RegionCondition = RegionCondition(Region(GlobeRect(47.49616, 47.73464, -122.43689, -122.23591), "Seattle", "Port City"), 2022, 751454, 2980000.0)
+region2 : RegionCondition = RegionCondition(Region(GlobeRect(44.47121, 44.57550, -88.14111, -87.84214), "Green Bay", "Port City"), 2018, 104756, 2780000.0)
 region3 : RegionCondition = RegionCondition(Region(GlobeRect(34.62524, 52.01460, -155.43856, -132.83251), "North Pacific", "Ocean"), 2020, 0, 0.0)
-region4 : RegionCondition = RegionCondition(Region(GlobeRect(35.23421, 35.31154, -120.72305, -120.61785), "SLO", "Agriculture City"), 2021, 47545, 0.151)
+region4 : RegionCondition = RegionCondition(Region(GlobeRect(35.23421, 35.31154, -120.72305, -120.61785), "SLO", "Agriculture City"), 2021, 47545, 151000.0)
 
 example_region_conditions : List[RegionCondition] = [region1, region2, region3, region4]
+
+#This function calculates the tons of CO2 emitted by a single person per year
+def emissions_per_capita(r:RegionCondition) -> float:
+    if r.pop <= 0:
+        raise ValueError("Population can not be 0")
+    return r.ghg_rate / r.pop
 
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
     def test_example_1(self):
         self.assertEqual(14,14)
 
+    def test_epc_1(self):
+        self.assertEqual(emissions_per_capita(region2), 26.54)
+    def test_epc_2(self):
+        self.assertEqual(emissions_per_capita(region3), ValueError)
 
 if (__name__ == '__main__'):
     unittest.main()
