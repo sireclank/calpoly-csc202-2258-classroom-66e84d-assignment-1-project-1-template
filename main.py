@@ -57,8 +57,6 @@ def emissions_per_square_km(c:RegionCondition) -> float:
     if area(c.region.rect) <= 0:
         raise ValueError("Area can not be 0")
     return c.ghg_rate / area(c.region.rect)
-
-
     
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
