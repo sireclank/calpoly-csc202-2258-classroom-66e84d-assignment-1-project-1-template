@@ -5,10 +5,7 @@ import math
 import sys
 sys.setrecursionlimit(10**6)
 
-
-
-
-
+calpoly_email_addresses = ["jjmazza@calpoly.edu"]
 
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
