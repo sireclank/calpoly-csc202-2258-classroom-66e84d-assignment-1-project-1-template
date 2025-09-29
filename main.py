@@ -51,6 +51,11 @@ def area(gr:GlobeRect) -> float:
     init_sa = (2 * math.pi * r * y2km) - (2 * math.pi * r * y1km)
     actual_sa = init_sa * ((abs(gr.west_long - gr.east_long)) / 360)
     return actual_sa
+
+def emissions_per_square_km(c:RegionCondition) -> float:
+    if area(c.region.rect) <= 0:
+        raise ValueError("Area can not be 0")
+    return area(c.region.rect)
     
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
