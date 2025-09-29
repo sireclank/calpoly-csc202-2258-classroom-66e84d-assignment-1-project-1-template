@@ -25,6 +25,14 @@ class Region:
     name : str
     terrain : str
 
+#Creates a class that holds the details of a specific region
+@dataclass(frozen=True)
+class RegionCondition:
+    region : Region
+    year : int
+    pop : int
+    ghg_rate : float
+
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
     def test_example_1(self):
