@@ -10,14 +10,10 @@ calpoly_email_addresses = ["jjmazza@calpoly.edu"]
 #Creates a class for rectangles on a globe
 @dataclass(frozen=True)
 class GlobeRect:
-    #latitudes must be from -90.0 to 90.0
-    lo_lat = float #must be lower than hi_lat
-    hi_lat = float
-    
-    #longitudes must be from -180.0 to 180.0
-    #if west_long == east_long, then width = 0
-    west_long = float
-    east_long = float
+    lo_lat : float
+    hi_lat : float
+    west_long : float
+    east_long : float
 
 #Creates a class that takes a rectangle from GlobeRect and describes it
 @dataclass(frozen=True)
@@ -32,11 +28,12 @@ class RegionCondition:
     region : Region
     year : int #The year of the region
     pop : int #The population of people in the region
-    ghg_rate : float #in tons of C02 equivalent per year
+    ghg_rate : float #in million metric tons of C02 equivalent per year
 
-#This function describes the region condition of Seattle, WA
-def Seattle(reg:RegionCondition):
-
+region1 : RegionCondition = RegionCondition(Region(GlobeRect(47.49616, 47.73464, -122.43689, -122.23591), "Seattle", "Port City"), 2022, 751454, 2.98)
+region2 : RegionCondition = RegionCondition(Region(GlobeRect(44.47121, 44.57550, -88.14111, -87.84214), "Green Bay", "Port City"), 2018, 104756, 2.78)
+region3 : RegionCondition = RegionCondition(Region(GlobeRect(34.62524, 52.01460, -155.43856, -132.83251), "North Pacific", "Ocean"), 2020, 0, 0.0)
+region4 : RegionCondition = RegionCondition(Region(GlobeRect(35.23421, 35.31154, -120.72305, -120.61785), "SLO", "Agriculture City"), 2021, 47545, 0.151)
 
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
