@@ -43,6 +43,15 @@ def emissions_per_capita(r:RegionCondition) -> float:
         raise ValueError("Population can not be 0")
     return r.ghg_rate / r.pop
 
+#This function calculates the area (in square kilometers) of GlobeRect
+def area(gr:GlobeRect) -> float:
+    y1km = gr.lo_lat * 111.32
+    y2km = gr.hi_lat * 111.32
+    r = 6371
+    init_sa = (2 * math.pi * r * y2km) - (2 * math.pi * r * y1km)
+    actual_sa = init_sa * ((abs(gr.west_long - gr.east_long)) / 360)
+    return actual_sa
+    
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
     def test_example_1(self):
@@ -52,6 +61,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(emissions_per_capita(region2), 26.54)
     def test_epc_2(self):
         self.assertEqual(emissions_per_capita(region3), ValueError)
+
+    def test_area(self):
+        self.assertEqual(area(region1.region.rect), 217.3)
 
 if (__name__ == '__main__'):
     unittest.main()
