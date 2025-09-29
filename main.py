@@ -45,19 +45,21 @@ def emissions_per_capita(r:RegionCondition) -> float:
 
 #This function calculates the area (in square kilometers) of GlobeRect
 def area(gr:GlobeRect) -> float:
-    y1km = gr.lo_lat * 111.32
-    y2km = gr.hi_lat * 111.32
-    r = 6371
-    init_sa = (2 * math.pi * r * y2km) - (2 * math.pi * r * y1km)
-    actual_sa = init_sa * ((abs(gr.west_long - gr.east_long)) / 360)
-    return actual_sa
+    y1 : float = math.sin(gr.lo_lat) * 6371
+    y2 : float = math.sin(gr.hi_lat) * 6371
+    init_area : float = (2 * math.pi * 6371 * y2) - (2 * math.pi * 6371 * y1)
+    actual_area : float = init_area * (abs(gr.west_long - gr.east_long) / 360)
+    return actual_area
 
 #This function calculates the CO2 emissions per km^2
 def emissions_per_square_km(c:RegionCondition) -> float:
     if area(c.region.rect) <= 0:
         raise ValueError("Area can not be 0")
     return c.ghg_rate / area(c.region.rect)
+
+def densest(l1 : List[RegionCondition]) -> str:
     
+
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
     def test_example_1(self):
