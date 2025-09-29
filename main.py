@@ -35,6 +35,8 @@ region2 : RegionCondition = RegionCondition(Region(GlobeRect(44.47121, 44.57550,
 region3 : RegionCondition = RegionCondition(Region(GlobeRect(34.62524, 52.01460, -155.43856, -132.83251), "North Pacific", "Ocean"), 2020, 0, 0.0)
 region4 : RegionCondition = RegionCondition(Region(GlobeRect(35.23421, 35.31154, -120.72305, -120.61785), "SLO", "Agriculture City"), 2021, 47545, 0.151)
 
+example_region_conditions : List[RegionCondition] = [region1, region2, region3, region4]
+
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
     def test_example_1(self):
