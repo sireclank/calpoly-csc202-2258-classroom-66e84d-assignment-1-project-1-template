@@ -18,6 +18,13 @@ class GlobeRect:
     west_long = int
     east_long = int
 
+#Creates a class that takes a rectangle from GlobeRect and describes it
+@dataclass(frozen=True)
+class Region:
+    area : GlobeRect
+    name : str
+    terrain : str
+
 # put all test cases in the "Tests" class.
 class Tests(unittest.TestCase):
     def test_example_1(self):
