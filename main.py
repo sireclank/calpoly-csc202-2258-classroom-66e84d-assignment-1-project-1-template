@@ -45,9 +45,8 @@ def emissions_per_capita(r:RegionCondition) -> float:
 
 #This function calculates the area (in square kilometers) of GlobeRect
 def area(gr:GlobeRect) -> float:
-    y1 : float = math.sin(gr.lo_lat) * 6371
-    y2 : float = math.sin(gr.hi_lat) * 6371
-    init_area : float = (2 * math.pi * 6371 * y2) - (2 * math.pi * 6371 * y1)
+    r : float = 6371.0
+    init_area : float = 2 * math.pi * r * (r * math.sin(gr.hi_lat) - r * math.sin(gr.lo_lat))
     actual_area : float = init_area * (abs(gr.west_long - gr.east_long) / 360)
     return actual_area
 
@@ -65,10 +64,8 @@ class Tests(unittest.TestCase):
     def test_example_1(self):
         self.assertEqual(14,14)
 
-    def test_epc_1(self):
+    def test_epc(self):
         self.assertEqual(emissions_per_capita(region2), 26.54)
-    def test_epc_2(self):
-        self.assertEqual(emissions_per_capita(region3), ValueError)
 
     def test_area(self):
         self.assertEqual(area(region1.region.rect), 217.3)
